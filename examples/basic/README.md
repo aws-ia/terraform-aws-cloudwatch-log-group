@@ -25,7 +25,9 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_name"></a> [name](#input\_name) | n/a | `string` | `"enable-logs-testing"` | no |
+| <a name="input_aws_service"></a> [aws\_service](#input\_aws\_service) | n/a | `string` | `"dynamodb.application-autoscaling.amazonaws.com"` | no |
+| <a name="input_name"></a> [name](#input\_name) | n/a | `string` | `"app123"` | no |
+| <a name="input_retention_in_days"></a> [retention\_in\_days](#input\_retention\_in\_days) | n/a | `string` | `"14"` | no |
 
 ## Outputs
 

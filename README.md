@@ -1,7 +1,7 @@
 <!-- BEGIN_TF_DOCS -->
 # AWS Cloudwatch Module
 
-This module allows
+This module creates an AWS Cloudwatch log group along with the corresponding IAM permissions.
 
 ## Requirements
 
@@ -14,7 +14,7 @@ This module allows
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.3.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.4.0 |
 
 ## Modules
 
@@ -24,11 +24,11 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_cloudwatch_log_group.log_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
-| [aws_iam_policy.iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
-| [aws_iam_role.iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy_attachment.iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_policy_document.policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_cloudwatch_log_group.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
+| [aws_iam_policy.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_role.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_policy_document.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
@@ -46,6 +46,5 @@ No modules.
 |------|-------------|
 | <a name="output_iam_role"></a> [iam\_role](#output\_iam\_role) | IAM role for cloudwatch log group. |
 | <a name="output_log_group"></a> [log\_group](#output\_log\_group) | Log group resource output. |
-| <a name="output_service_name"></a> [service\_name](#output\_service\_name) | The service being targetted |
 | <a name="output_sid_service_id"></a> [sid\_service\_id](#output\_sid\_service\_id) | The service being targetted |
 <!-- END_TF_DOCS -->

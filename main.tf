@@ -1,7 +1,7 @@
 locals {
   # sid cannot have a dash(-) if one is present we will remove and title case the string
-  sid_name     = title(join("", [for _, value in split("-", var.name) : title(value)]))
-  service_id   = trimsuffix(var.aws_service, ".amazonaws.com")
+  sid_name   = title(join("", [for _, value in split("-", var.name) : title(value)]))
+  service_id = trimsuffix(var.aws_service, ".amazonaws.com")
   # sid cannot have a dash(-) or a period(.) if present we will remove and title case the string
   sid_service_id = title(
     join("", [for _, value in split(".",

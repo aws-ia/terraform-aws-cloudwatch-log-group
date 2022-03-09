@@ -31,6 +31,6 @@ variable "aws_service" {
   type        = string
   validation {
     error_message = "The aws service to be logged cannot end or begin with a hyphen and must contain the suffix 'amazonaws.com'."
-    condition = can(regex("^[0-9a-z]+([0-9a-z-.]*[0-9a-z])*.amazonaws.com$", var.aws_service))
+    condition     = can(regex("^[0-9a-z]+([0-9a-z-.]*[0-9a-z])*.amazonaws.com$", var.aws_service))
   }
 }
