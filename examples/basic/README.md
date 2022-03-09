@@ -13,7 +13,9 @@ No providers.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_basic_enable_cloudwatch_logs_example"></a> [basic\_enable\_cloudwatch\_logs\_example](#module\_basic\_enable\_cloudwatch\_logs\_example) | ../.. | n/a |
 
 ## Resources
 
@@ -21,9 +23,14 @@ No resources.
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_name"></a> [name](#input\_name) | n/a | `string` | `"enable-logs-testing"` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_iam_role"></a> [iam\_role](#output\_iam\_role) | IAM role for cloudwatch log group. |
+| <a name="output_log_group"></a> [log\_group](#output\_log\_group) | Log group resource output. |
 <!-- END_TF_DOCS -->

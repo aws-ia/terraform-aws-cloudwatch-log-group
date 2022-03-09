@@ -1,3 +1,3 @@
 variable "name" {
-  default = "test-testing-Tony"
+  default = "enable-logs-testing"
 }

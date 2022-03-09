@@ -1,9 +1,9 @@
 variable "name" {
-  description = "Name of flow logs and supporting resources."
+  description = "Name of logs and supporting resources."
   type        = string
   validation {
     error_message = "Can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-)."
-    condition = can(regex("^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$", var.name))
+    condition     = can(regex("^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$", var.name))
   }
 }
 
@@ -24,4 +24,14 @@ variable "kms_key_id" {
   type        = string
   # REMOVE, SHOULD NOT BE NULL BY DEFAULT
   default = null
+}
+
+variable "aws_service" {
+  description = "The aws service to be logged"
+  type        = string
+  validation {
+    error_message = "The aws service to be logged must end in amazonaws.com."
+    # Cannot end or begin with a hyphen and must contain the correct suffix 
+    condition = can(regex("^[0-9a-z]+([0-9a-z-.]*[0-9a-z])*.amazonaws.com$", var.aws_service))
+  }
 }

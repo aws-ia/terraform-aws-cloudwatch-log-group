@@ -11,7 +11,7 @@ func TestExamplesBasic(t *testing.T) {
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../examples/basic",
 		Vars: map[string]interface{}{
-			"name":     "test-testing-tester",
+			"name":     "test-enable-logs",
 		},
 	}
 
