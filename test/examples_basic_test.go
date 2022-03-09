@@ -9,7 +9,7 @@ import (
 func TestExamplesBasic(t *testing.T) {
 
 	terraformOptions := &terraform.Options{
-		TerraformDir: "../examples/basic",
+		TerraformDir: "../examples/cloudwatch_log_group",
 		Vars: map[string]interface{}{
 			"name":     "test-enable-logs",
 		},
