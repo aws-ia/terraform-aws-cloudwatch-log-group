@@ -1,8 +1,8 @@
 locals {
   # sid cannot have a dash(-) if one is present we will remove and title case the string
   sid_name     = title(join("", [for _, value in split("-", var.name) : title(value)]))
-  service_name = var.aws_service
   service_id   = trimsuffix(var.aws_service, ".amazonaws.com")
+  # sid cannot have a dash(-) or a period(.) if present we will remove and title case the string
   sid_service_id = title(
     join("", [for _, value in split(".",
       join("", [for _, value in split("-", local.service_id) : title(value)])) : title(value)]
@@ -10,8 +10,8 @@ locals {
   )
 }
 
-resource "aws_cloudwatch_log_group" "log_group" {
-  name_prefix       = var.name
+resource "aws_cloudwatch_log_group" "main" {
+  name_prefix       = "${var.name}-${local.service_id}-"
   retention_in_days = var.retention_in_days
   kms_key_id        = var.kms_key_id
   tags              = var.tags
@@ -20,9 +20,9 @@ resource "aws_cloudwatch_log_group" "log_group" {
 # cannot use awscc_iam_role
 # https://github.com/hashicorp/terraform-provider-awscc/issues/402
 
-resource "aws_iam_role" "iam_role" {
-  name_prefix = "${var.name}-cloudwatch-log-"
-  description = "Cloudwatch permissions for ${var.name} ${local.service_id}"
+resource "aws_iam_role" "main" {
+  name_prefix = "${var.name}-cw-access-role-"
+  description = "Cloudwatch permissions role for ${var.name} with ${local.service_id}"
 
   tags = var.tags
 
@@ -31,10 +31,10 @@ resource "aws_iam_role" "iam_role" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "${local.sid_name}${local.sid_service_id}CloudwatchLogs",
+      "Sid": "${local.sid_name}${local.sid_service_id}CloudwatchTrust",
       "Effect": "Allow",
       "Principal": {
-        "Service": "${local.service_name}"
+        "Service": "${var.aws_service}"
       },
       "Action": "sts:AssumeRole"
     }
@@ -43,12 +43,13 @@ resource "aws_iam_role" "iam_role" {
 EOF
 }
 
-resource "aws_iam_policy" "iam_policy" {
-  name_prefix = "${var.name}-${local.service_id}-cloudwatch-log-"
-  policy      = data.aws_iam_policy_document.policy_document.json
+resource "aws_iam_policy" "main" {
+  name_prefix = "${var.name}-cw-access-policy-"
+  policy      = data.aws_iam_policy_document.main.json
+  description = "Cloudwatch permissions policy for ${var.name} with ${local.service_id}"
 }
 
-data "aws_iam_policy_document" "policy_document" {
+data "aws_iam_policy_document" "main" {
   statement {
     sid = "${local.sid_name}LogsToCW"
 
@@ -66,7 +67,7 @@ data "aws_iam_policy_document" "policy_document" {
   }
 }
 
-resource "aws_iam_role_policy_attachment" "iam_policy" {
-  role       = aws_iam_role.iam_role.name
-  policy_arn = aws_iam_policy.iam_policy.arn
+resource "aws_iam_role_policy_attachment" "main" {
+  role       = aws_iam_role.main.name
+  policy_arn = aws_iam_policy.main.arn
 }

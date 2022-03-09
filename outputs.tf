@@ -1,16 +1,11 @@
 output "iam_role" {
   description = "IAM role for cloudwatch log group."
-  value       = aws_iam_role.iam_role
+  value       = aws_iam_role.main
 }
 
 output "log_group" {
   description = "Log group resource output."
-  value       = aws_cloudwatch_log_group.log_group
-}
-
-output "service_name" {
-  description = "The service being targetted"
-  value       = local.service_name
+  value       = aws_cloudwatch_log_group.main
 }
 
 output "sid_service_id" {

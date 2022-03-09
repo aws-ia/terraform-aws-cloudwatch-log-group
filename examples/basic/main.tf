@@ -1,6 +1,7 @@
 module "basic_enable_cloudwatch_logs_example" {
   source            = "../.."
   name              = var.name
-  retention_in_days = "30"
-  aws_service       = "dynamodb.application-autoscaling.amazonaws.com"
+  retention_in_days = var.retention_in_days
+  aws_service       = var.aws_service
 }
+
