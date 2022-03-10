@@ -22,8 +22,6 @@ variable "tags" {
 variable "kms_key_id" {
   description = "Encryption for KMS key."
   type        = string
-  # REMOVE, SHOULD NOT BE NULL BY DEFAULT
-  default = null
 }
 
 variable "aws_service" {
