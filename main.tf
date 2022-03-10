@@ -1,7 +1,7 @@
 locals {
   # sid cannot have a dash(-) if one is present we will remove and title case the string
   sid_name   = title(join("", [for _, value in split("-", var.name) : title(value)]))
-  service_id = trimsuffix(var.aws_service, ".amazonaws.com")
+  service_id = trimsuffix(var.aws_service_principal, ".amazonaws.com")
   # sid cannot have a dash(-) or a period(.) if present we will remove and title case the string
   sid_service_id = title(
     join("", [for _, value in split(".",
@@ -34,7 +34,7 @@ resource "aws_iam_role" "main" {
       "Sid": "${local.sid_name}${local.sid_service_id}CloudwatchTrust",
       "Effect": "Allow",
       "Principal": {
-        "Service": "${var.aws_service}"
+        "Service": "${var.aws_service_principal}"
       },
       "Action": "sts:AssumeRole"
     }

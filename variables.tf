@@ -24,11 +24,11 @@ variable "kms_key_id" {
   type        = string
 }
 
-variable "aws_service" {
-  description = "The aws service to be logged"
+variable "aws_service_principal" {
+  description = "The name of the service being logged. 'Service Principal' is a special AWS identity that represents a service or other component with an easily understood name. You can find a list of AWS Service Principals at https://gist.github.com/shortjared/4c1e3fe52bdfa47522cfe5b41e5d6f22"
   type        = string
   validation {
     error_message = "The aws service to be logged cannot end or begin with a hyphen and must contain the suffix 'amazonaws.com'."
-    condition     = can(regex("^[0-9a-z]+([0-9a-z-.]*[0-9a-z])*.amazonaws.com$", var.aws_service))
+    condition     = can(regex("^[0-9a-z]+([0-9a-z-.]*[0-9a-z])*.amazonaws.com$", var.aws_service_principal))
   }
 }
