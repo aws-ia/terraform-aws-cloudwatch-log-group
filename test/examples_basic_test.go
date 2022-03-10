@@ -9,11 +9,10 @@ import (
 func TestExamplesBasic(t *testing.T) {
 
 	terraformOptions := &terraform.Options{
-		TerraformDir: "../examples/basic",
-		// Vars: map[string]interface{}{
-		// 	"myvar":     "test",
-		// 	"mylistvar": []string{"list_item_1"},
-		// },
+		TerraformDir: "../examples/cloudwatch_log_group",
+		Vars: map[string]interface{}{
+			"name":     "test-enable-logs",
+		},
 	}
 
 	defer terraform.Destroy(t, terraformOptions)
